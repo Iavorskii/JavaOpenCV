@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import static ru.sfedu.opencv.Constant.CFG_DEFAULT_VALUE;
-import static ru.sfedu.opencv.Constant.CFG_KEY;
+import static ru.sfedu.opencv.Constants.CFG_DEFAULT_VALUE;
+import static ru.sfedu.opencv.Constants.CFG_KEY;
 
 public class ConfigurationUtil {
 
@@ -17,7 +17,7 @@ public class ConfigurationUtil {
     }
 
     private static Properties getConfiguration() throws IOException {
-        if(configuration.isEmpty()){
+        if (configuration.isEmpty()) {
             loadConfiguration();
         }
         return configuration;
@@ -43,5 +43,4 @@ public class ConfigurationUtil {
     public static String getConfigurationEntry(String key) throws IOException{
         return getConfiguration().getProperty(key);
     }
-
 }

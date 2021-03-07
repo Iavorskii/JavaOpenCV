@@ -4,9 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-import static ru.sfedu.opencv.Constant.CFG_KEY;
-import static ru.sfedu.opencv.Constant.PATH_TO_NATIVE_LIB;
+import static ru.sfedu.opencv.Constants.CFG_KEY;
+import static ru.sfedu.opencv.Constants.PATH_TO_NATIVE_LIB_WINDOWS;
 
 public class ConfigurationUtilTest {
 
@@ -17,7 +16,6 @@ public class ConfigurationUtilTest {
 
     @Test
     public  void test() throws Exception {
-//        System.out.println(ConfigurationUtil.getConfigurationEntry(PATH_TO_NATIVE_LIB));
-        Assert.assertEquals(ConfigurationUtil.getConfigurationEntry(PATH_TO_NATIVE_LIB), "667");
+        Assert.assertEquals(ConfigurationUtil.getConfigurationEntry(PATH_TO_NATIVE_LIB_WINDOWS), "667");
     }
 }
