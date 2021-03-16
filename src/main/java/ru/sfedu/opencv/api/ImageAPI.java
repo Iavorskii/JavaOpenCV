@@ -25,21 +25,25 @@ public class ImageAPI {
         // init the API with curent os..
         Constants.OSType CurrentOSTypeName = getOperatingSystemType();
         logger.info("Current OS type name - " + CurrentOSTypeName);
-        switch (CurrentOSTypeName) {
-            case LINUX:
-                System.load(getConfigurationEntry(Constants.PATH_TO_NATIVE_LIB_LINUX));
-                break;
-            case WINDOWS:
-                System.load(getConfigurationEntry(Constants.PATH_TO_NATIVE_LIB_WINDOWS));
-                break;
-            case MACOS:
-                System.load(getConfigurationEntry(Constants.PATH_TO_NATIVE_LIB_MAC_OS));
-            case OTHER:
-                throw new Exception("Current OS does not support!!!!!");
-            default:
-                throw new Exception("Your OS does not support!!!");
+        try {
+            switch (CurrentOSTypeName) {
+                case LINUX:
+                    System.load(getConfigurationEntry(Constants.PATH_TO_NATIVE_LIB_LINUX));
+                    break;
+                case WINDOWS:
+                    System.load(getConfigurationEntry(Constants.PATH_TO_NATIVE_LIB_WINDOWS));
+                    break;
+                case MACOS:
+                    System.load(getConfigurationEntry(Constants.PATH_TO_NATIVE_LIB_MAC_OS));
+                case OTHER:
+                    throw new Exception("Current OS does not support!!!!!");
+                default:
+                    throw new Exception("Your OS does not support!!!");
+            }
+            logger.info("OpenCV version" + Core.getVersionString());
+        } catch (Exception e) {
+            throw new Exception("OOPS, we have some problem...");
         }
-        logger.info("OpenCV version" + Core.getVersionString());
     }
 
     public Constants.OSType getOperatingSystemType() {
@@ -63,9 +67,11 @@ public class ImageAPI {
 
     public void showImage(Mat m) throws InterruptedException {
         int type = BufferedImage.TYPE_BYTE_GRAY;
+
         if ( m.channels() > 1 ) {
             type = BufferedImage.TYPE_3BYTE_BGR;
         }
+
         int bufferSize = m.channels()*m.cols()*m.rows();
         byte [] b = new byte[bufferSize];
         m.get(0,0,b);
@@ -99,7 +105,8 @@ public class ImageAPI {
         return mat;
     }
 
-    public void saveImageOnDisk (Mat mat, String path) {
-        Imgcodecs.imwrite(path, mat);
+    public void saveImageOnDisk (Mat mat, String path, String fileName, String extension) {
+        String fullName = path + fileName + extension;
+        Imgcodecs.imwrite(fullName, mat);
     }
 }

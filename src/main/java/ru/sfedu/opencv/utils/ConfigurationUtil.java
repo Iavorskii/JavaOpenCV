@@ -40,7 +40,7 @@ public class ConfigurationUtil {
      */
     //следующему методу мы передаем значения строковой константы, по значению этой строковой константы
     //которая явл ключом, мы подгружаем данные, которые у нас будут содержаться в source'e
-    public static String getConfigurationEntry(String key) throws IOException{
+    public static String getConfigurationEntry(String key) throws IOException {
         return getConfiguration().getProperty(key);
     }
 }
